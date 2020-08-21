@@ -1,0 +1,66 @@
+// C
+
+product
+- id
+- name
+
+category
+- id
+- name
+
+product_category
+- id_product
+- id_category
+
+Product(1, "Laptop Dell");
+Product(2, "iPhone 5s");
+
+Category(1, "Laptopy");
+Category(2, "Telefony");
+
+ProductCategory(1, 1);
+ProductCategory(2, 2);
+
+// B
+
+user
+- id
+- name
+- id_voucher_group
+
+voucher_group
+- id
+- name
+
+VoucherGroup(1, "10%")
+User(1, "John", 1);
+
+// A
+
+product
+- id
+- name
+
+attribute
+- id
+- name
+
+attribute_value
+- id
+- value
+- id_attribute
+
+product_attribute
+- id_product
+- id_attribute
+
+Product(1, "Dress");
+Attribute(1, "Color");
+Attribute(2, "Size");
+AttributeValue(1, "Black", 1);
+AttributeValue(2, "Red", 1);
+AttributeValue(3, "L", 2);
+AttributeValue(4, "S", 2);
+
+ProductAttribute(1, 1);
+ProductAttribute(1, 2);
