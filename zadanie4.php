@@ -1,5 +1,38 @@
 <?php
 
+$taxRule1 = new TaxRule('23%', 23);
+$taxRule2 = new TaxRule('8%', 8);
+$taxRule3 = new TaxRule('npo', 0);
+
+$product1 = new Product('Product 1', 100.33);
+$product2 = new Product('Product 2', 22);
+$product3 = new Product('Product 3', 23.11);
+$product4 = new Product('Product 4', 511.1);
+
+$position1 = new Position($product1, $taxRule1, 3);
+$position2 = new Position($product2, $taxRule2, 1);
+$position3 = new Position($product3, $taxRule1, 4);
+$position4 = new Position($product4, $taxRule3, 1);
+
+$order = new Order();
+$order->addPosition($position1);
+$order->addPosition($position2);
+$order->addPosition($position3);
+$order->addPosition($position4);
+
+
+echo sprintf(
+    'Order total price without tax: %s <br/> Order total tax amount: %s <br/> Order total price with tax: %s <br/>',
+    $order->getTotalPriceWithoutTax(),
+    $order->getTotalTaxAmount(),
+    $order->getTotalPriceWithTax()
+);
+
+echo '<pre>';
+print_r($order->getSummary());
+echo '</pre>';
+
+
 class TaxRule
 {
     private int $tax;
@@ -179,35 +212,3 @@ class Order
         return $this->totalTaxAmount;
     }
 }
-
-$taxRule1 = new TaxRule('23%', 23);
-$taxRule2 = new TaxRule('8%', 8);
-$taxRule3 = new TaxRule('npo', 0);
-
-$product1 = new Product('Product 1', 100.33);
-$product2 = new Product('Product 2', 22);
-$product3 = new Product('Product 3', 23.11);
-$product4 = new Product('Product 4', 511.1);
-
-$position1 = new Position($product1, $taxRule1, 3);
-$position2 = new Position($product2, $taxRule2, 1);
-$position3 = new Position($product3, $taxRule1, 4);
-$position4 = new Position($product4, $taxRule3, 1);
-
-$order = new Order();
-$order->addPosition($position1);
-$order->addPosition($position2);
-$order->addPosition($position3);
-$order->addPosition($position4);
-
-
-echo sprintf(
-    'Order total price without tax: %s <br/> Order total tax amount: %s <br/> Order total price with tax: %s <br/>',
-    $order->getTotalPriceWithoutTax(),
-    $order->getTotalTaxAmount(),
-    $order->getTotalPriceWithTax()
-);
-
-echo '<pre>';
-print_r($order->getSummary());
-echo '</pre>';
